@@ -1,0 +1,38 @@
+version: '3'
+services:
+  historyserver:
+    build:
+      context: ./cloudera-cluster-historyserver
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-historyserver
+    hostname: historyserver
+  hdfs-namenode:
+    build:
+      context: ./cloudera-cluster-hdfs-namenode
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-hdfs-namenode
+    hostname: hdfs-namenode
+  hdfs-secondarynamenode:
+    build:
+      context: ./cloudera-cluster-hdfs-secondarynamenode
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-hdfs-secondarynamenode
+    hostname: hdfs-secondarynamenode
+  yarn-resourcemanager:
+    build:
+      context: ./cloudera-cluster-yarn-resourcemanager
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-yarn-resourcemanager
+    hostname: yarn-resourcemanager
+  datanode1:
+    build:
+      context: ./cloudera-cluster-datanode
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-datanode
+    hostname: datanode1
+  datanode2:
+    build:
+      context: ./cloudera-cluster-datanode
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-datanode
+    hostname: datanode2
