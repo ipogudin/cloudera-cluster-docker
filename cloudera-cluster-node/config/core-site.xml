@@ -20,5 +20,12 @@
      <name>fs.defaultFS</name>
      <value>{{ default .Env.CORE_SITE_FS_DEFAULTFS "hdfs://hdfs-namenode:8020" }}</value>
   </property>
-
+  <property>
+     <name>hadoop.proxyuser.mapred.groups</name>
+     <value>*</value>
+  </property>
+  <property>
+     <name>hadoop.proxyuser.mapred.hosts</name>
+     <value>*</value>
+  </property>
 </configuration>

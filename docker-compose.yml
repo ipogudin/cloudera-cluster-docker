@@ -36,3 +36,15 @@ services:
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-datanode
     hostname: datanode2
+  gateway:
+    build:
+      context: ./cloudera-cluster-gateway
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-gateway
+    hostname: gateway
+    container_name: gateway
+
+networks:
+ default:
+  external:
+    name: cloudera-cluster-net

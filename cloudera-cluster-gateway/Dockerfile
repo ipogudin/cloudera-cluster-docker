@@ -13,4 +13,4 @@ RUN dockerize -template "/usr/lib/hadoop/etc/templates/:/usr/lib/hadoop/etc/hado
 
 CMD ["/usr/local/bin/dockerize", \
 "-template", "/usr/lib/hadoop/etc/templates/:/usr/lib/hadoop/etc/hadoop/", \
-"/bin/bash"]
+"/bin/sleep", "365000d"]
