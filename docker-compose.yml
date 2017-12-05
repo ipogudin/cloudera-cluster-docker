@@ -36,6 +36,36 @@ services:
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-datanode
     hostname: datanode2
+  zookeeper1:
+    build:
+      context: ./cloudera-cluster-zookeeper
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-zookeeper
+    hostname: zookeeper1
+    environment:
+      ZOOKEEPER_MYID: "1"
+      ZOOKEEPER_CLIENT_PORT: "2181"
+      ZOOKEEPER_SERVERS: "server.1=zookeeper1:2201:8301\nserver.2=zookeeper2:2202:8302\nserver.3=zookeeper3:2203:8303"
+  zookeeper2:
+    build:
+      context: ./cloudera-cluster-zookeeper
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-zookeeper
+    hostname: zookeeper2
+    environment:
+      ZOOKEEPER_MYID: "2"
+      ZOOKEEPER_CLIENT_PORT: "2182"
+      ZOOKEEPER_SERVERS: "server.1=zookeeper1:2201:8301\nserver.2=zookeeper2:2202:8302\nserver.3=zookeeper3:2203:8303"
+  zookeeper3:
+    build:
+      context: ./cloudera-cluster-zookeeper
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-zookeeper
+    hostname: zookeeper3
+    environment:
+      ZOOKEEPER_MYID: "3"
+      ZOOKEEPER_CLIENT_PORT: "2183"
+      ZOOKEEPER_SERVERS: "server.1=zookeeper1:2201:8301\nserver.2=zookeeper2:2202:8302\nserver.3=zookeeper3:2203:8303"
   gateway:
     build:
       context: ./cloudera-cluster-gateway

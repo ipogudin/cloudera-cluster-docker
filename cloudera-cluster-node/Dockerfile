@@ -11,10 +11,10 @@ yum -y install hadoop && \
 rm -rf /var/cache/yum/*
 
 RUN mkdir /usr/lib/hadoop/etc/templates
-
 COPY config/* /usr/lib/hadoop/etc/templates/
 
-#COPY config/* /usr/lib/hadoop/etc/hadoop/
+RUN mkdir /etc/zookeeper/templates
+COPY zookeeper-config/* /etc/zookeeper/templates/
 
 ENV HADOOP_HOME /usr/lib/hadoop
 ENV HADOOP_CONF_DIR /etc/hadoop/conf
