@@ -11,6 +11,7 @@ You must create a network before running a cluster from docker-compose.
 
 - To run a new container with bash: `docker run --rm -i -t CONTAINER_ID bash`
 - To run a bash session in a container which has already been started: `docker exec -i -t CONTAINER_ID bash`
+- To remove all cloudera cluster images in local cache: `docker rmi $(docker images | grep ipogudin/cloudera-cluster | tr -s ' ' | cut -d ' ' -f 3)`
 
 ### Gateway commands
 

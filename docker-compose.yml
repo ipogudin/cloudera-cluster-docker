@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 services:
   historyserver:
     build:
@@ -6,73 +6,192 @@ services:
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-historyserver
     hostname: historyserver
+    domainname: cloudera-cluster-net
+    container_name: historyserver
   hdfs-namenode:
     build:
       context: ./cloudera-cluster-hdfs-namenode
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-hdfs-namenode
     hostname: hdfs-namenode
+    domainname: cloudera-cluster-net
+    container_name: hdfs-namenode
   hdfs-secondarynamenode:
     build:
       context: ./cloudera-cluster-hdfs-secondarynamenode
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-hdfs-secondarynamenode
     hostname: hdfs-secondarynamenode
+    domainname: cloudera-cluster-net
+    container_name: hdfs-secondarynamenode
+    depends_on:
+      - hdfs-namenode
   yarn-resourcemanager:
     build:
       context: ./cloudera-cluster-yarn-resourcemanager
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-yarn-resourcemanager
     hostname: yarn-resourcemanager
+    domainname: cloudera-cluster-net
+    container_name: yarn-resourcemanager
+    depends_on:
+      - historyserver
   datanode1:
     build:
       context: ./cloudera-cluster-datanode
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-datanode
     hostname: datanode1
+    domainname: cloudera-cluster-net
+    container_name: datanode1
+    depends_on:
+      - historyserver
+      - hdfs-namenode
+      - hdfs-secondarynamenode
+      - yarn-resourcemanager
   datanode2:
     build:
       context: ./cloudera-cluster-datanode
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-datanode
     hostname: datanode2
+    domainname: cloudera-cluster-net
+    container_name: datanode2
+    depends_on:
+      - historyserver
+      - hdfs-namenode
+      - hdfs-secondarynamenode
+      - yarn-resourcemanager
   zookeeper1:
     build:
       context: ./cloudera-cluster-zookeeper
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-zookeeper
     hostname: zookeeper1
+    domainname: cloudera-cluster-net
+    container_name: zookeeper1
+    expose:
+     - "2181"
+     - "2201"
+     - "8301"
     environment:
       ZOOKEEPER_MYID: "1"
       ZOOKEEPER_CLIENT_PORT: "2181"
-      ZOOKEEPER_SERVERS: "server.1=zookeeper1:2201:8301\nserver.2=zookeeper2:2202:8302\nserver.3=zookeeper3:2203:8303"
+      ZOOKEEPER_SERVERS: "server.1=zookeeper1.cloudera-cluster-net:2201:8301\nserver.2=zookeeper2.cloudera-cluster-net:2202:8302\nserver.3=zookeeper3.cloudera-cluster-net:2203:8303"
   zookeeper2:
     build:
       context: ./cloudera-cluster-zookeeper
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-zookeeper
     hostname: zookeeper2
+    domainname: cloudera-cluster-net
+    container_name: zookeeper2
+    expose:
+     - "2182"
+     - "2202"
+     - "8302"
     environment:
       ZOOKEEPER_MYID: "2"
       ZOOKEEPER_CLIENT_PORT: "2182"
-      ZOOKEEPER_SERVERS: "server.1=zookeeper1:2201:8301\nserver.2=zookeeper2:2202:8302\nserver.3=zookeeper3:2203:8303"
+      ZOOKEEPER_SERVERS: "server.1=zookeeper1.cloudera-cluster-net:2201:8301\nserver.2=zookeeper2.cloudera-cluster-net:2202:8302\nserver.3=zookeeper3.cloudera-cluster-net:2203:8303"
   zookeeper3:
     build:
       context: ./cloudera-cluster-zookeeper
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-zookeeper
     hostname: zookeeper3
+    domainname: cloudera-cluster-net
+    container_name: zookeeper3
+    expose:
+     - "2183"
+     - "2203"
+     - "8303"
     environment:
       ZOOKEEPER_MYID: "3"
       ZOOKEEPER_CLIENT_PORT: "2183"
-      ZOOKEEPER_SERVERS: "server.1=zookeeper1:2201:8301\nserver.2=zookeeper2:2202:8302\nserver.3=zookeeper3:2203:8303"
+      ZOOKEEPER_SERVERS: "server.1=zookeeper1.cloudera-cluster-net:2201:8301\nserver.2=zookeeper2.cloudera-cluster-net:2202:8302\nserver.3=zookeeper3.cloudera-cluster-net:2203:8303"
+  hbase-master:
+    build:
+      context: ./cloudera-cluster-hbase-master
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-hbase-master
+    hostname: hbase-master
+    domainname: cloudera-cluster-net
+    container_name: hbase-master
+    ports:
+     - "16010:16010"
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+      - datanode1
+      - datanode2
+    environment:
+      REGIONSERVERS: "regionserver1.cloudera-cluster-net\nregionserver2.cloudera-cluster-net"
+      BBACKUP_MASTERS: "hbase-master-backup.cloudera-cluster-net"
+      HBASE_SITE_HBASE_ZOOKEEPER_QUORUM: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
+  hbase-master-backup:
+    build:
+      context: ./cloudera-cluster-hbase-master-backup
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-hbase-master-backup
+    hostname: hbase-master-backup
+    domainname: cloudera-cluster-net
+    container_name: hbase-master-backup
+    depends_on:
+      - hbase-master
+    environment:
+      REGIONSERVERS: "regionserver1.cloudera-cluster-net\nregionserver2.cloudera-cluster-net"
+      BACKUP_MASTERS: "hbase-master-backup.cloudera-cluster-net"
+      HBASE_SITE_HBASE_ZOOKEEPER_QUORUM: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
+  regionserver1:
+    build:
+      context: ./cloudera-cluster-hbase-regionserver
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-hbase-regionserver
+    hostname: regionserver1
+    domainname: cloudera-cluster-net
+    container_name: regionserver1
+    ports:
+     - "16031:16030"
+    depends_on:
+      - hbase-master-backup
+    environment:
+      REGIONSERVERS: "regionserver1.cloudera-cluster-net\nregionserver2.cloudera-cluster-net"
+      BACKUP_MASTERS: "hbase-master-backup.cloudera-cluster-net"
+      HBASE_SITE_HBASE_ZOOKEEPER_QUORUM: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
+  regionserver2:
+    build:
+      context: ./cloudera-cluster-hbase-regionserver
+      dockerfile: Dockerfile
+    image: ipogudin/cloudera-cluster-hbase-regionserver
+    hostname: regionserver2
+    domainname: cloudera-cluster-net
+    container_name: regionserver2
+    ports:
+     - "16032:16030"
+    depends_on:
+      - hbase-master-backup
+    environment:
+      REGIONSERVERS: "regionserver1.cloudera-cluster-net\nregionserver2.cloudera-cluster-net"
+      BACKUP_MASTERS: "hbase-master-backup.cloudera-cluster-net"
+      HBASE_SITE_HBASE_ZOOKEEPER_QUORUM: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
   gateway:
     build:
       context: ./cloudera-cluster-gateway
       dockerfile: Dockerfile
     image: ipogudin/cloudera-cluster-gateway
     hostname: gateway
+    domainname: cloudera-cluster-net
     container_name: gateway
+    volumes:
+      - type: "bind"
+        source: "./shared"
+        target: "/shared"
+    environment:
+      REGIONSERVERS: "regionserver1.cloudera-cluster-net\nregionserver2.cloudera-cluster-net"
+      BACKUP_MASTERS: "hbase-master-backup.cloudera-cluster-net"
+      HBASE_SITE_HBASE_ZOOKEEPER_QUORUM: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
 
 networks:
  default:

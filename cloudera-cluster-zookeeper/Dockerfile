@@ -2,6 +2,12 @@ FROM ipogudin/cloudera-cluster-node
 
 MAINTAINER Ivan Pogudin <i.a.pogudin@gmail.com>
 
+RUN yum -y install zookeeper && \
+rm -rf /var/cache/yum/*
+
+RUN mkdir /etc/zookeeper/templates
+COPY config-templates/* /etc/zookeeper/templates/
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 VOLUME /var/lib/zookeeper

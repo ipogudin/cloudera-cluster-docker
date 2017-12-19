@@ -1,4 +1,4 @@
-FROM ipogudin/cloudera-cluster-node
+FROM ipogudin/cloudera-cluster-hadoop-node
 
 MAINTAINER Ivan Pogudin <i.a.pogudin@gmail.com>
 

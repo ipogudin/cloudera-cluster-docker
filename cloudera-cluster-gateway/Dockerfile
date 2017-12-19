@@ -1,16 +1,15 @@
-FROM ipogudin/cloudera-cluster-node
+FROM ipogudin/cloudera-cluster-hadoop-node
 
 MAINTAINER Ivan Pogudin <i.a.pogudin@gmail.com>
 
-RUN yum -y install pig hive spark-worker && rm -rf /var/cache/yum/*
+RUN yum -y install pig hive spark-worker hbase && rm -rf /var/cache/yum/*
 
-RUN mkdir /data-dir
+RUN mkdir /shared
 
-VOLUME /data-dir
-
-# configure not parametrized directories for format hdfs namenode
-RUN dockerize -template "/usr/lib/hadoop/etc/templates/:/usr/lib/hadoop/etc/hadoop/"
+RUN mkdir /etc/hbase/templates
+COPY config-templates/* /etc/hbase/templates/
 
 CMD ["/usr/local/bin/dockerize", \
 "-template", "/usr/lib/hadoop/etc/templates/:/usr/lib/hadoop/etc/hadoop/", \
+"-template", "/etc/hbase/templates/:/etc/hbase/conf/", \
 "/bin/sleep", "365000d"]
