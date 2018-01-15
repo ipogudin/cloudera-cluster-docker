@@ -8,6 +8,8 @@ services:
     hostname: historyserver
     domainname: cloudera-cluster-net
     container_name: historyserver
+    environment:
+      HADOOP_JOB_HISTORYSERVER_HEAPSIZE: "256"
   hdfs-namenode:
     build:
       context: ./cloudera-cluster-hdfs-namenode
@@ -16,6 +18,8 @@ services:
     hostname: hdfs-namenode
     domainname: cloudera-cluster-net
     container_name: hdfs-namenode
+    environment:
+      HADOOP_HEAPSIZE: "256"
   hdfs-secondarynamenode:
     build:
       context: ./cloudera-cluster-hdfs-secondarynamenode
@@ -26,6 +30,8 @@ services:
     container_name: hdfs-secondarynamenode
     depends_on:
       - hdfs-namenode
+    environment:
+      HADOOP_HEAPSIZE: "256"
   yarn-resourcemanager:
     build:
       context: ./cloudera-cluster-yarn-resourcemanager
@@ -36,6 +42,8 @@ services:
     container_name: yarn-resourcemanager
     depends_on:
       - historyserver
+    environment:
+      YARN_RESOURCEMANAGER_HEAPSIZE: "256"
   datanode1:
     build:
       context: ./cloudera-cluster-datanode
@@ -49,6 +57,9 @@ services:
       - hdfs-namenode
       - hdfs-secondarynamenode
       - yarn-resourcemanager
+    environment:
+      YARN_HEAPSIZE: "2048"
+      HADOOP_HEAPSIZE: "2048"
   datanode2:
     build:
       context: ./cloudera-cluster-datanode
@@ -62,6 +73,9 @@ services:
       - hdfs-namenode
       - hdfs-secondarynamenode
       - yarn-resourcemanager
+    environment:
+      YARN_HEAPSIZE: "2048"
+      HADOOP_HEAPSIZE: "2048"
   zookeeper1:
     build:
       context: ./cloudera-cluster-zookeeper
@@ -78,6 +92,7 @@ services:
       ZOOKEEPER_MYID: "1"
       ZOOKEEPER_CLIENT_PORT: "2181"
       ZOOKEEPER_SERVERS: "server.1=zookeeper1.cloudera-cluster-net:2201:8301\nserver.2=zookeeper2.cloudera-cluster-net:2202:8302\nserver.3=zookeeper3.cloudera-cluster-net:2203:8303"
+      SERVER_JVMFLAGS: "-Xms32m -Xmx32m"
   zookeeper2:
     build:
       context: ./cloudera-cluster-zookeeper
@@ -94,6 +109,7 @@ services:
       ZOOKEEPER_MYID: "2"
       ZOOKEEPER_CLIENT_PORT: "2182"
       ZOOKEEPER_SERVERS: "server.1=zookeeper1.cloudera-cluster-net:2201:8301\nserver.2=zookeeper2.cloudera-cluster-net:2202:8302\nserver.3=zookeeper3.cloudera-cluster-net:2203:8303"
+      SERVER_JVMFLAGS: "-Xms32m -Xmx32m"
   zookeeper3:
     build:
       context: ./cloudera-cluster-zookeeper
@@ -110,6 +126,7 @@ services:
       ZOOKEEPER_MYID: "3"
       ZOOKEEPER_CLIENT_PORT: "2183"
       ZOOKEEPER_SERVERS: "server.1=zookeeper1.cloudera-cluster-net:2201:8301\nserver.2=zookeeper2.cloudera-cluster-net:2202:8302\nserver.3=zookeeper3.cloudera-cluster-net:2203:8303"
+      SERVER_JVMFLAGS: "-Xms32m -Xmx32m"
   hbase-master:
     build:
       context: ./cloudera-cluster-hbase-master
@@ -130,6 +147,7 @@ services:
       REGIONSERVERS: "regionserver1.cloudera-cluster-net\nregionserver2.cloudera-cluster-net"
       BBACKUP_MASTERS: "hbase-master-backup.cloudera-cluster-net"
       HBASE_SITE_HBASE_ZOOKEEPER_QUORUM: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
+      HBASE_ENV_HBASE_HEAPSIZE: "256m"
   hbase-master-backup:
     build:
       context: ./cloudera-cluster-hbase-master-backup
@@ -144,6 +162,7 @@ services:
       REGIONSERVERS: "regionserver1.cloudera-cluster-net\nregionserver2.cloudera-cluster-net"
       BACKUP_MASTERS: "hbase-master-backup.cloudera-cluster-net"
       HBASE_SITE_HBASE_ZOOKEEPER_QUORUM: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
+      HBASE_ENV_HBASE_HEAPSIZE: "256m"
   regionserver1:
     build:
       context: ./cloudera-cluster-hbase-regionserver
@@ -160,6 +179,7 @@ services:
       REGIONSERVERS: "regionserver1.cloudera-cluster-net\nregionserver2.cloudera-cluster-net"
       BACKUP_MASTERS: "hbase-master-backup.cloudera-cluster-net"
       HBASE_SITE_HBASE_ZOOKEEPER_QUORUM: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
+      HBASE_ENV_HBASE_HEAPSIZE: "256m"
   regionserver2:
     build:
       context: ./cloudera-cluster-hbase-regionserver
@@ -176,6 +196,7 @@ services:
       REGIONSERVERS: "regionserver1.cloudera-cluster-net\nregionserver2.cloudera-cluster-net"
       BACKUP_MASTERS: "hbase-master-backup.cloudera-cluster-net"
       HBASE_SITE_HBASE_ZOOKEEPER_QUORUM: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
+      HBASE_ENV_HBASE_HEAPSIZE: "256m"
   kafka1:
     build:
       context: ./cloudera-cluster-kafka-node
@@ -193,6 +214,7 @@ services:
       SERVER_PROPERTIES_LISTENERS: "0.0.0.0:9092"
       SERVER_PROPERTIES_ADVERTISED_LISTENERS: "kafka1.cloudera-cluster-net:9092"
       SERVER_PROPERTIES_ZOOKEEPER_CONNECT: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
+      KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
   kafka2:
     build:
       context: ./cloudera-cluster-kafka-node
@@ -210,6 +232,7 @@ services:
       SERVER_PROPERTIES_LISTENERS: "0.0.0.0:9092"
       SERVER_PROPERTIES_ADVERTISED_LISTENERS: "kafka2.cloudera-cluster-net:9092"
       SERVER_PROPERTIES_ZOOKEEPER_CONNECT: "zookeeper1.cloudera-cluster-net:2181,zookeeper2.cloudera-cluster-net:2182,zookeeper3.cloudera-cluster-net:2183"
+      KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
   gateway:
     build:
       context: ./cloudera-cluster-gateway

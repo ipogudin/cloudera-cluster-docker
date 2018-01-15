@@ -16,6 +16,5 @@ EXPOSE 2181 3881
 
 CMD ["/usr/local/bin/dockerize", \
 "-template", "/etc/zookeeper/templates/myid:/var/lib/zookeeper/myid", \
-"-template", "/etc/zookeeper/templates/zoo.cfg:/etc/zookeeper/conf.dist/zoo.cfg", \
-"-template", "/etc/zookeeper/templates/default-zookeeper:/etc/default/zookeeper", \
+"-template", "/etc/zookeeper/templates/zoo.cfg:/etc/zookeeper/conf/zoo.cfg", \
 "/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

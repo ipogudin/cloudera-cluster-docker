@@ -30,7 +30,7 @@
 # export HBASE_CLASSPATH=
 
 # The maximum amount of heap to use. Default is left to JVM default.
-# export HBASE_HEAPSIZE=1G
+export HBASE_HEAPSIZE={{ default .Env.HBASE_ENV_HBASE_HEAPSIZE "1G" }}
 
 # Uncomment below if you intend to use off heap cache. For example, to allocate 8G of 
 # offheap, set the value to "8G".

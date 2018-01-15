@@ -11,5 +11,5 @@ EXPOSE 50020 50075 8042
 VOLUME /hdfs
 
 CMD ["/usr/local/bin/dockerize", \
-"-template", "/usr/lib/hadoop/etc/templates/:/usr/lib/hadoop/etc/hadoop/", \
+"-template", "/etc/hadoop/templates/:/etc/hadoop/conf/", \
 "/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

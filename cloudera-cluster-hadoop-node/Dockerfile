@@ -6,7 +6,7 @@ RUN yum -y install hadoop && \
 rm -rf /var/cache/yum/*
 
 RUN mkdir /usr/lib/hadoop/etc/templates
-COPY config-templates/* /usr/lib/hadoop/etc/templates/
+COPY config-templates/* /etc/hadoop/templates/
 
 ENV HADOOP_HOME /usr/lib/hadoop
 ENV HADOOP_CONF_DIR /etc/hadoop/conf

@@ -10,6 +10,6 @@ RUN mkdir /etc/hbase/templates
 COPY config-templates/* /etc/hbase/templates/
 
 CMD ["/usr/local/bin/dockerize", \
-"-template", "/usr/lib/hadoop/etc/templates/:/usr/lib/hadoop/etc/hadoop/", \
+"-template", "/etc/hadoop/templates/:/etc/hadoop/conf/", \
 "-template", "/etc/hbase/templates/:/etc/hbase/conf/", \
 "/bin/sleep", "365000d"]
