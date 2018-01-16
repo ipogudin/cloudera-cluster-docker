@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker build -t ipogudin/cloudera-cluster-base-oracle-jdk8 ./cloudera-cluster-base-oracle-jdk8/
+docker build -t ipogudin/cloudera-cluster-base-openjdk8 ./cloudera-cluster-base-openjdk8/
 docker build -t ipogudin/cloudera-cluster-node ./cloudera-cluster-node/
 docker build -t ipogudin/cloudera-cluster-hadoop-node ./cloudera-cluster-hadoop-node/
 docker build -t ipogudin/cloudera-cluster-hbase-node ./cloudera-cluster-hbase-node/

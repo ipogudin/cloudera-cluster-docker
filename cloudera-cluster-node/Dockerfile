@@ -1,4 +1,4 @@
-FROM ipogudin/cloudera-cluster-base-oracle-jdk8
+FROM ipogudin/cloudera-cluster-base-openjdk8
 
 MAINTAINER Ivan Pogudin <i.a.pogudin@gmail.com>
 
