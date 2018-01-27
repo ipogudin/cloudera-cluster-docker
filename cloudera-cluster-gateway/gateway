@@ -1,0 +1,8 @@
+#!/bin/bash
+
+/bin/sleep 20s
+
+#TODO replace with a loop untill success
+hdfs dfs -mkdir -p /user/root/spark2ApplicationHistory
+
+/bin/sleep 365000d

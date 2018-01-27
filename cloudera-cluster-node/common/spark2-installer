@@ -1,0 +1,11 @@
+#!/bin/bash
+
+mkdir /tmp/spark2-installation && \
+cd /tmp/spark2-installation && \
+wget --continue $SPARK_PARCEL --output-document=spark2.parcel && \
+tar -xvzf spark2.parcel && \
+cp -r /tmp/spark2-installation/SPARK2-*/bin/* /bin/ && \
+cp -r /tmp/spark2-installation/SPARK2-*/etc/* /etc/ && \
+cp -r /tmp/spark2-installation/SPARK2-*/lib/* /lib/ && \
+ln -s / /CDH && \
+rm -rf /tmp/spark2-installation

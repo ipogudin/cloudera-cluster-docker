@@ -1,8 +1,22 @@
-FROM ipogudin/cloudera-cluster-base-openjdk8
+FROM centos:7.4.1708
 
 MAINTAINER Ivan Pogudin <i.a.pogudin@gmail.com>
 
+ENV JDK_PACKAGE java-1.8.0-openjdk-1.8.0.151
+ENV DOCKERIZE_VERSION v0.6.0
 ENV CLOUDERA_VERSION 5.13.0 
+ENV SPARK_PARCEL http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera2/SPARK2-2.2.0.cloudera2-1.cdh5.12.0.p0.232957-el7.parcel
+
+ADD common /opt/common
+
+RUN yum -y install epel-release && rm -rf /var/cache/yum/*
+
+RUN yum -y install wget supervisor $JDK_PACKAGE && rm -rf /var/cache/yum/*
+
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && chown root:root /usr/local/bin/dockerize && chmod 555 /usr/local/bin/dockerize 
 
 RUN wget https://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/cloudera-cdh5.repo \
 -O /etc/yum.repos.d/cloudera-cdh5.repo && \

@@ -8,6 +8,8 @@ services:
     hostname: historyserver
     domainname: cloudera-cluster-net
     container_name: historyserver
+    ports:
+      - "19888:19888"
     environment:
       HADOOP_JOB_HISTORYSERVER_HEAPSIZE: "256"
   hdfs-namenode:
@@ -40,10 +42,12 @@ services:
     hostname: yarn-resourcemanager
     domainname: cloudera-cluster-net
     container_name: yarn-resourcemanager
+    ports:
+      - "8088:8088"
     depends_on:
       - historyserver
     environment:
-      YARN_RESOURCEMANAGER_HEAPSIZE: "256"
+      YARN_RESOURCEMANAGER_HEAPSIZE: "512"
   datanode1:
     build:
       context: ./cloudera-cluster-datanode
@@ -52,6 +56,8 @@ services:
     hostname: datanode1
     domainname: cloudera-cluster-net
     container_name: datanode1
+    ports:
+      - "8042:8042"
     depends_on:
       - historyserver
       - hdfs-namenode
