@@ -14,6 +14,9 @@ RUN bash /opt/common/spark2-installer
 RUN mkdir /etc/spark2/conf && \
 ln -s /etc/hadoop/conf /etc/spark2/conf/yarn-conf
 
+RUN mkdir /etc/spark/templates
+COPY spark-config-templates/* /etc/spark/templates/
+
 RUN mkdir /etc/spark2/templates
 COPY spark2-config-templates/* /etc/spark2/templates/
 
@@ -25,5 +28,7 @@ RUN chmod 555 /bin/gateway
 CMD ["/usr/local/bin/dockerize", \
 "-template", "/etc/hadoop/templates/:/etc/hadoop/conf/", \
 "-template", "/etc/hbase/templates/:/etc/hbase/conf/", \
+"-template", "/etc/spark/templates/spark-defaults.conf:/etc/spark/conf/spark-defaults.conf", \
+"-template", "/etc/spark/templates/log4j.properties:/etc/spark/conf/log4j.properties ", \
 "-template", "/etc/spark2/templates/:/etc/spark2/conf/", \
 "/bin/gateway"]
