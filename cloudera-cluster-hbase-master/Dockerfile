@@ -1,4 +1,4 @@
-FROM ipogudin/cloudera-cluster-hbase-node
+FROM ipogudin/cloudera-cluster-hbase-node:5.13.0.0
 
 MAINTAINER Ivan Pogudin <i.a.pogudin@gmail.com>
 

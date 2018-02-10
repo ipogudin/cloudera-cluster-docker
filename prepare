@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build -t ipogudin/cloudera-cluster-node ./cloudera-cluster-node/
-docker build -t ipogudin/cloudera-cluster-hadoop-node ./cloudera-cluster-hadoop-node/
-docker build -t ipogudin/cloudera-cluster-hbase-node ./cloudera-cluster-hbase-node/
+docker build -t ipogudin/cloudera-cluster-node:5.13.0.0 ./cloudera-cluster-node/
+docker build -t ipogudin/cloudera-cluster-hadoop-node:5.13.0.0 ./cloudera-cluster-hadoop-node/
+docker build -t ipogudin/cloudera-cluster-hbase-node:5.13.0.0 ./cloudera-cluster-hbase-node/

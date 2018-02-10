@@ -1,6 +1,6 @@
 # Cloudera Cluster Docker
 
-This repository contains configuration to build docker images for running a cloudera cluster. 
+This repository contains Docker contexts to build docker images for running a cloudera cluster. The goal of this project is to provide a multinode cloudera cluster as docker images for integration tests (it shouldn't be used on production).
 
 ### Network
 You must create a network before running a cluster from docker-compose.
