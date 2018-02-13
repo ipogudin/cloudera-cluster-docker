@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker rmi $(docker images | grep ipogudin/cloudera-cluster- | tr -s ' ' | cut -d ' ' -f 3)

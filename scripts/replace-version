@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source $(dirname "${BASH_SOURCE[0]}")/commons
+
+if [ -z $2 ]
+    then
+        echo "You should use 2 arguments to update from version1 to version2."
+        echo "./replace-version version1 version2"
+fi
+
+if [ $2 ]
+    then
+        echo "Yohoo" $1 $2
+        #find $PROJECT_ROOT -type f -exec sed -i '' 's/$1/$2/g' {} \;
+fi

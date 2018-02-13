@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PROJECT_ROOT_FROM_SCRIPTS_LOCATION=..
+
+# The absolute path to the scripts directory
+SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT=$SCRIPTPATH/$PROJECT_ROOT_FROM_SCRIPTS_LOCATION
+
+echo $SCRIPTPATH
+
+function set_project_root() {
+  cd $PROJECT_ROOT
+}
