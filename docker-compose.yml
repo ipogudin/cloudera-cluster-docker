@@ -4,7 +4,7 @@ services:
     build:
       context: ./cloudera-cluster-historyserver
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-historyserver:5.13.1.0
+    image: ipogudin/cloudera-cluster-historyserver:5.14.0.0
     hostname: historyserver
     domainname: cloudera-cluster-net
     container_name: historyserver
@@ -16,7 +16,7 @@ services:
     build:
       context: ./cloudera-cluster-hdfs-namenode
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-hdfs-namenode:5.13.1.0
+    image: ipogudin/cloudera-cluster-hdfs-namenode:5.14.0.0
     hostname: hdfs-namenode
     domainname: cloudera-cluster-net
     container_name: hdfs-namenode
@@ -26,7 +26,7 @@ services:
     build:
       context: ./cloudera-cluster-hdfs-secondarynamenode
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-hdfs-secondarynamenode:5.13.1.0
+    image: ipogudin/cloudera-cluster-hdfs-secondarynamenode:5.14.0.0
     hostname: hdfs-secondarynamenode
     domainname: cloudera-cluster-net
     container_name: hdfs-secondarynamenode
@@ -38,7 +38,7 @@ services:
     build:
       context: ./cloudera-cluster-yarn-resourcemanager
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-yarn-resourcemanager:5.13.1.0
+    image: ipogudin/cloudera-cluster-yarn-resourcemanager:5.14.0.0
     hostname: yarn-resourcemanager
     domainname: cloudera-cluster-net
     container_name: yarn-resourcemanager
@@ -52,7 +52,7 @@ services:
     build:
       context: ./cloudera-cluster-datanode
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-datanode:5.13.1.0
+    image: ipogudin/cloudera-cluster-datanode:5.14.0.0
     hostname: datanode1
     domainname: cloudera-cluster-net
     container_name: datanode1
@@ -70,7 +70,7 @@ services:
     build:
       context: ./cloudera-cluster-datanode
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-datanode:5.13.1.0
+    image: ipogudin/cloudera-cluster-datanode:5.14.0.0
     hostname: datanode2
     domainname: cloudera-cluster-net
     container_name: datanode2
@@ -86,7 +86,7 @@ services:
     build:
       context: ./cloudera-cluster-zookeeper
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-zookeeper:5.13.1.0
+    image: ipogudin/cloudera-cluster-zookeeper:5.14.0.0
     hostname: zookeeper1
     domainname: cloudera-cluster-net
     container_name: zookeeper1
@@ -103,7 +103,7 @@ services:
     build:
       context: ./cloudera-cluster-zookeeper
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-zookeeper:5.13.1.0
+    image: ipogudin/cloudera-cluster-zookeeper:5.14.0.0
     hostname: zookeeper2
     domainname: cloudera-cluster-net
     container_name: zookeeper2
@@ -120,7 +120,7 @@ services:
     build:
       context: ./cloudera-cluster-zookeeper
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-zookeeper:5.13.1.0
+    image: ipogudin/cloudera-cluster-zookeeper:5.14.0.0
     hostname: zookeeper3
     domainname: cloudera-cluster-net
     container_name: zookeeper3
@@ -137,7 +137,7 @@ services:
     build:
       context: ./cloudera-cluster-hbase-master
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-hbase-master:5.13.1.0
+    image: ipogudin/cloudera-cluster-hbase-master:5.14.0.0
     hostname: hbase-master
     domainname: cloudera-cluster-net
     container_name: hbase-master
@@ -158,7 +158,7 @@ services:
     build:
       context: ./cloudera-cluster-hbase-master-backup
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-hbase-master-backup:5.13.1.0
+    image: ipogudin/cloudera-cluster-hbase-master-backup:5.14.0.0
     hostname: hbase-master-backup
     domainname: cloudera-cluster-net
     container_name: hbase-master-backup
@@ -173,7 +173,7 @@ services:
     build:
       context: ./cloudera-cluster-hbase-regionserver
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-hbase-regionserver:5.13.1.0
+    image: ipogudin/cloudera-cluster-hbase-regionserver:5.14.0.0
     hostname: regionserver1
     domainname: cloudera-cluster-net
     container_name: regionserver1
@@ -190,7 +190,7 @@ services:
     build:
       context: ./cloudera-cluster-hbase-regionserver
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-hbase-regionserver:5.13.1.0
+    image: ipogudin/cloudera-cluster-hbase-regionserver:5.14.0.0
     hostname: regionserver2
     domainname: cloudera-cluster-net
     container_name: regionserver2
@@ -207,7 +207,7 @@ services:
     build:
       context: ./cloudera-cluster-kafka-node
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-kafka-node:5.13.1.0
+    image: ipogudin/cloudera-cluster-kafka-node:5.14.0.0
     hostname: kafka1
     domainname: cloudera-cluster-net
     container_name: kafka1
@@ -225,7 +225,7 @@ services:
     build:
       context: ./cloudera-cluster-kafka-node
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-kafka-node:5.13.1.0
+    image: ipogudin/cloudera-cluster-kafka-node:5.14.0.0
     hostname: kafka2
     domainname: cloudera-cluster-net
     container_name: kafka2
@@ -243,7 +243,7 @@ services:
     build:
       context: ./cloudera-cluster-gateway
       dockerfile: Dockerfile
-    image: ipogudin/cloudera-cluster-gateway:5.13.1.0
+    image: ipogudin/cloudera-cluster-gateway:5.14.0.0
     hostname: gateway
     domainname: cloudera-cluster-net
     container_name: gateway
