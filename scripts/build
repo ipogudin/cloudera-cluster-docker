@@ -2,7 +2,7 @@
 
 source $(dirname "${BASH_SOURCE[0]}")/commons
 
-docker build -t ipogudin/cloudera-cluster-node:5.14.0.0 $PROJECT_ROOT/cloudera-cluster-node/
-docker build -t ipogudin/cloudera-cluster-hadoop-node:5.14.0.0 $PROJECT_ROOT/cloudera-cluster-hadoop-node/
-docker build -t ipogudin/cloudera-cluster-hbase-node:5.14.0.0 $PROJECT_ROOT/cloudera-cluster-hbase-node/
+docker build -t ipogudin/cloudera-cluster-node:5.14.0.1 $PROJECT_ROOT/cloudera-cluster-node/
+docker build -t ipogudin/cloudera-cluster-hadoop-node:5.14.0.1 $PROJECT_ROOT/cloudera-cluster-hadoop-node/
+docker build -t ipogudin/cloudera-cluster-hbase-node:5.14.0.1 $PROJECT_ROOT/cloudera-cluster-hbase-node/
 docker-compose --file $PROJECT_ROOT/docker-compose.yml build
