@@ -2,7 +2,7 @@ FROM centos:7.4.1708
 
 MAINTAINER Ivan Pogudin <i.a.pogudin@gmail.com>
 
-ENV JDK_PACKAGE java-1.8.0-openjdk-1.8.0.151
+ENV JDK_PACKAGE java-1.8.0-openjdk
 ENV DOCKERIZE_VERSION v0.6.0
 ENV CLOUDERA_VERSION 5.14.0 
 ENV SPARK_PARCEL http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera2/SPARK2-2.2.0.cloudera2-1.cdh5.12.0.p0.232957-el7.parcel

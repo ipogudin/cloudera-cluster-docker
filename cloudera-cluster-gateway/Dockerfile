@@ -1,15 +1,11 @@
-FROM ipogudin/cloudera-cluster-hadoop-node:5.14.0.0
+FROM ipogudin/cloudera-cluster-datanode:5.14.0.0
 
 MAINTAINER Ivan Pogudin <i.a.pogudin@gmail.com>
-
-RUN yum -y install pig hive spark-worker hbase && rm -rf /var/cache/yum/*
 
 RUN mkdir /shared
 
 RUN mkdir /etc/hbase/templates
 COPY config-templates/* /etc/hbase/templates/
-
-RUN bash /opt/common/spark2-installer
 
 RUN mkdir /etc/spark2/conf && \
 ln -s /etc/hadoop/conf /etc/spark2/conf/yarn-conf
