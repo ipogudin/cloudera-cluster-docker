@@ -4,8 +4,8 @@ MAINTAINER Ivan Pogudin <i.a.pogudin@gmail.com>
 
 ENV JDK_PACKAGE java-1.8.0-openjdk
 ENV DOCKERIZE_VERSION v0.6.0
-ENV CLOUDERA_VERSION 5.14.0 
-ENV SPARK_PARCEL http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera2/SPARK2-2.2.0.cloudera2-1.cdh5.12.0.p0.232957-el7.parcel
+ENV CLOUDERA_VERSION 5.14.2 
+ENV SPARK_PARCEL http://archive.cloudera.com/spark2/parcels/2.3.0.cloudera2/SPARK2-2.3.0.cloudera2-1.cdh5.13.3.p0.316101-el7.parcel
 
 ADD common /opt/common
 
