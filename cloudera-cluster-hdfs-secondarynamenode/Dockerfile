@@ -1,4 +1,4 @@
-FROM ipogudin/cloudera-cluster-hdfs-namenode:5.14.0.0
+FROM ipogudin/cloudera-cluster-hdfs-namenode:5.14.2.0
 
 MAINTAINER Ivan Pogudin <i.a.pogudin@gmail.com>
 
